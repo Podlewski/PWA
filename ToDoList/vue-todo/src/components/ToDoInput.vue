@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row justify-content-center">
+            <h1 class="text-right">Vue ToDo App</h1>
+        </div>
+        <div class="row py-3 mx-1">
             <input @change="todoTextChange" v-bind:value="todoText" class="col form-control mr-2" type="text"/>
             <button @click="addTodoItem" class="btn btn-primary"> Add </button>
         </div>

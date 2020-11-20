@@ -34,7 +34,6 @@ export default createStore({
       let index = state.todos.find((t) => t.id == todo.id);
       if (index != -1) {
         state.todos[index] = todo;
-        console.log(todo)
       }
     },
   },
