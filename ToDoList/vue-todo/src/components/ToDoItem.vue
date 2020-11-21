@@ -32,9 +32,9 @@ export default {
       this.editing = this.editing == true ? false : true;
       if (this.editing) {
         this.todoText = todo.title;
-        this.updateTodo(todo);
       } else {
         todo.title = this.todoText;
+        this.updateTodo(todo);
       }
     }
   }

@@ -2,12 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    todos: [
-      {
-        id: 1,
-        title: "One",
-      }
-    ]
+    todos: JSON.parse(localStorage.getItem('todos'))
   },
   getters: {
     allTodos: (state)=>state.todos,
@@ -15,13 +10,16 @@ export default createStore({
   actions: {
     addTodo({commit}, todo) {
       commit('add_todo', todo);
+      commit('update_storage');
     },
     deleteTodo({commit}, id) {
-      commit('delete_todo', id)
+      commit('delete_todo', id);
+      commit('update_storage');
     },
     updateTodo({commit}, todo){ 
-      commit('update_todo', todo)
-    },
+      commit('update_todo', todo);
+      commit('update_storage');
+    }
   },
   mutations: {
     add_todo(state, todo) {
@@ -35,6 +33,9 @@ export default createStore({
       if (index != -1) {
         state.todos[index] = todo;
       }
+    },
+    update_storage(state) {
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     },
   },
   modules: {
