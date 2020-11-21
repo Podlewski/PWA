@@ -5,13 +5,11 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-const DATA = [
-  { id: 'todo-0', name: 'Eat' },
-  { id: 'todo-1', name: 'Sleep' },
-  { id: 'todo-2', name: 'Repeat' }
-];
+const tasks = localStorage.getItem('tasks')
+  ? JSON.parse(localStorage.getItem('tasks'))
+  : [];
 
-ReactDOM.render(<App tasks={DATA} />, document.getElementById('root'));
+ReactDOM.render(<App tasks={tasks} />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -4,8 +4,33 @@ import './App.css';
 import Todo from './components/Todo';
 import Form from './components/Form';
 
-function App(props) {
+const App = (props) => {
   const [tasks, setTasks] = useState(props.tasks);
+
+  const saveTasks = (tasks) => {
+    setTasks(tasks);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
+
+  const addTask = (name) => {
+    const newTask = { id: 'todo-' + nanoid(), name: name };
+    saveTasks([...tasks, newTask]);
+  };
+
+  const deleteTask = (id) => {
+    const remainingTasks = tasks.filter((task) => id !== task.id);
+    saveTasks(remainingTasks);
+  };
+
+  const editTask = (id, newName) => {
+    const editedTaskList = tasks.map((task) => {
+      if (id === task.id) {
+        return { ...task, name: newName };
+      }
+      return task;
+    });
+    saveTasks(editedTaskList);
+  };
 
   const taskList = tasks.map((task) => (
     <Todo
@@ -20,25 +45,6 @@ function App(props) {
   const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
   const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
-  function addTask(name) {
-    const newTask = { id: 'todo-' + nanoid(), name: name, completed: false };
-    setTasks([...tasks, newTask]);
-  }
-
-  function deleteTask(id) {
-    const remainingTasks = tasks.filter((task) => id !== task.id);
-    setTasks(remainingTasks);
-  }
-
-  function editTask(id, newName) {
-    const editedTaskList = tasks.map((task) => {
-      if (id === task.id) {
-        return { ...task, name: newName };
-      }
-      return task;
-    });
-    setTasks(editedTaskList);
-  }
   return (
     <div className='todoapp stack-large'>
       <Form addTask={addTask} />
@@ -51,6 +57,6 @@ function App(props) {
       </ul>
     </div>
   );
-}
+};
 
 export default App;

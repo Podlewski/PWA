@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
-export default function Todo(props) {
+const Todo = (props) => {
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState('');
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setNewName(e.target.value);
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     props.editTask(props.id, newName);
     setNewName('');
     setEditing(false);
-  }
+  };
 
   const editingTemplate = (
     <form className='stack-small' onSubmit={handleSubmit}>
@@ -69,4 +69,6 @@ export default function Todo(props) {
   );
 
   return <li className='todo'>{isEditing ? editingTemplate : viewTemplate}</li>;
-}
+};
+
+export default Todo;
