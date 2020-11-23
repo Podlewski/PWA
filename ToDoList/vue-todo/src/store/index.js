@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    todos: JSON.parse(localStorage.getItem('todos'))
+    todos: [],
   },
   getters: {
     allTodos: (state)=>state.todos,
@@ -37,6 +37,9 @@ export default createStore({
     update_storage(state) {
       localStorage.setItem('todos', JSON.stringify(state.todos));
     },
+    initialise_state(state) {
+      state.todos = JSON.parse(localStorage.getItem('todos'));
+    }
   },
   modules: {
   }

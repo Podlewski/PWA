@@ -1,24 +1,9 @@
 # vue-todo
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
+To run:
 ```
 npm run build
+serve dist
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Address: [http://localhost:5000](http://localhost:5000)

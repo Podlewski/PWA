@@ -5,3 +5,4 @@ import store from './store'
 import './registerServiceWorker'
 
 createApp(App).use(store).mount('#app')
+store.commit('initialise_state')
