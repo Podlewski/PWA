@@ -38,8 +38,10 @@ export default createStore({
       localStorage.setItem('todos', JSON.stringify(state.todos));
     },
     initialise_state(state) {
-      state.todos = JSON.parse(localStorage.getItem('todos'));
-    }
+      if (localStorage.getItem('todos') !== null) {
+        state.todos = JSON.parse(localStorage.getItem('todos'));
+      }
+    },
   },
   modules: {
   }
