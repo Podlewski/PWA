@@ -30,7 +30,8 @@
     <title>GlobalWeather</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-transparent">
+  <nav class="navbar navbar-light bg-transparent navbar-expand-lg">
+    <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img
           src="global-weather.png"
@@ -39,7 +40,38 @@
           loading="lazy"
         />         
       </a>
-  </nav>   
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" ></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link smallText" href="#">Sign in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
