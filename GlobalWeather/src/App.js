@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Navbar from "./Navbar";
 import Form from "./app_component/form.component";
 import Weather from "./app_component/weather.component";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,6 +9,7 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "weather-icons/css/weather-icons.css";
 import cloudicon from "./assets/cloudicon.png"
+
 const Api_Key = "429736441cf3572838aa10530929f7cd";
 
 class App extends React.Component {
@@ -108,6 +110,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Navbar/>
         <img src={cloudicon} className="backlogo" alt={cloudicon} />
         <Form loadweather={this.getWeather} error={this.state.error} />
         <Weather
