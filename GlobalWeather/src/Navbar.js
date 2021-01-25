@@ -1,5 +1,8 @@
 import React from "react";
 import "./Navbar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solStar } from '@fortawesome/free-solid-svg-icons/';
+import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
 import { auth, signInWithGoogle } from './firebase.utils';
 import GoogleButton from 'react-google-button'
 
@@ -7,8 +10,11 @@ class Navbar extends React.Component {
   constructor() {
     super();
     this.state = {
-      currentUser: null
+      currentUser: null,
+      favouriteCity: null,
+      notification: false,
     };
+
   }
 
   unsubscribeFromAuth = null;
@@ -48,13 +54,47 @@ class Navbar extends React.Component {
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item my-auto">
+              <li class="nav-item my-auto pr-4">
                 {
                   this.state.currentUser ?
-                  <div className="navbar-text"> Hello {this.state.currentUser.displayName} </div> : <div/>
+                    <div>
+                    {
+                      this.state.favouriteCity ?
+                        <button className="city-button">
+                          <div>
+                            <FontAwesomeIcon className="fa-color pr-1" icon={solStar} />
+                            <div className="navbar-text">City name</div>
+                          </div>
+                        </button> : 
+                        <div class="my-auto">
+                          <FontAwesomeIcon className="fa-color pr-1" icon={regStar} />
+                          <div className="navbar-text font-italic"> None </div>
+                        </div>
+                    }
+                    </div> : <div/>
                 }
               </li>
-              <li class="nav-item pl-4 pr-2">
+              <li class="nav-item my-auto pr-4">
+                {
+                  this.state.currentUser ?
+                  <div>
+                    <input
+                      name="weatherNotifications"
+                      type="checkbox"
+                      // checked={this.state.notification}
+                      // onChange={this.handleInputChange}
+                      />
+                    <div className="pl-2 navbar-text"> Weather change notification </div> 
+                  </div> : <div/>
+                }
+              </li>
+              <li class="nav-item my-auto pr-4">
+                {
+                  this.state.currentUser ?
+                  <div className="navbar-text font-weight-bold"> Hello {this.state.currentUser.displayName} </div> : <div/>
+                }
+              </li>
+              <li class="nav-item pr-2">
                 {
                   this.state.currentUser ?
                     <button className='btn btn-outline-white waves-effect waves-light'

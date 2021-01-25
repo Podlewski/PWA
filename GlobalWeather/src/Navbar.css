@@ -1,4 +1,13 @@
+.fa-color {
+  color: #FFF !important;
+}
+
 .navbar-text{
     color: #FFF !important;
     vertical-align: middle;
   }
+
+.city-button {
+  border: none;
+  background-color: Transparent;
+}

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "bootstrap": "^4.3.1",
     "firebase": "^8.2.4",
     "mdbootstrap": "git+https://github.com/mdbootstrap/material-design-for-bootstrap.git",
@@ -10,8 +14,6 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-google-button": "^0.7.2",
-    "react-google-login": "^5.2.2",
-    "react-google-signin": "^1.0.3",
     "react-scripts": "3.0.1",
     "weather-icons": "git+https://github.com/erikflowers/weather-icons.git"
   },
