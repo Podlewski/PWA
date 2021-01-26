@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./Navbar";
+import { auth, signInWithGoogle } from './firebase.utils';
+import Navbar from "./app_component/navbar.component";
 import Form from "./app_component/form.component";
 import Weather from "./app_component/weather.component";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,8 +17,11 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      currentUser: null,
       city: undefined,
       country: undefined,
+      favouriteCity: undefined,
+      favouriteCountry: undefined,
       icon: undefined,
       main: undefined,
       celsius: undefined,
@@ -37,6 +41,18 @@ class App extends React.Component {
       Clear: "wi-day-sunny",
       Clouds: "wi-day-fog"
     };
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   get_WeatherIcon(icons, rangeId) {
@@ -75,9 +91,17 @@ class App extends React.Component {
   getWeather = async e => {
     e.preventDefault();
 
-    const country = e.target.elements.country.value;
     const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
+  
+    this.loadWeather(city, country)
+  }
 
+  loadFavouriteWetaher = () => {
+    this.loadWeather(this.state.favouriteCity, this.state.favouriteCountry)
+  }
+
+  loadWeather = async (city, country) => {
     if (country && city) {
       const api_call = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`
@@ -107,14 +131,30 @@ class App extends React.Component {
     }
   };
 
+  addCityToFavourite = () =>
+  {  
+    this.setState({
+      favouriteCity: this.state.city,
+      favouriteCountry: this.state.country,
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <Navbar/>
+        <Navbar 
+          signin={signInWithGoogle}
+          signout={() => auth.signOut()}
+          currentUser={this.state.currentUser}
+          favouriteCity={this.state.favouriteCity}
+          onFavouriteClick={this.loadFavouriteWetaher}
+        />
         <img src={cloudicon} className="backlogo" alt={cloudicon} />
         <Form loadweather={this.getWeather} error={this.state.error} />
         <Weather
           cityname={this.state.city}
+          onFavouriteClick={this.addCityToFavourite}
+          favouriteCity={this.state.favouriteCity}
           weatherIcon={this.state.icon}
           temp_celsius={this.state.celsius}
           feels_like={this.state.feels_like}

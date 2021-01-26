@@ -1,5 +1,6 @@
 import React from "react";
 import "./weather.style.css";
+import "./navbar.style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as solStar } from '@fortawesome/free-solid-svg-icons/';
 import { faStar as regStar } from '@fortawesome/free-regular-svg-icons';
@@ -11,9 +12,14 @@ const Weather = props => {
         <div className="row justify-content-center py-3">
           {
             props.cityname ? 
-            <div className="pr-3">
-              <button className="star-button p-1"><h2 className="m-0"><FontAwesomeIcon className="fa-color" icon={regStar} /></h2></button>
-            </div> : <div/>
+              <div className="pr-3">
+              <button className="city-button p-1" onClick={props.onFavouriteClick}><h2 className="m-0">
+              {
+                props.favouriteCity === props.cityname ?
+                  <FontAwesomeIcon className="fa-color" icon={solStar} /> :
+                  <FontAwesomeIcon className="fa-color" icon={regStar} />
+              }
+              </h2></button></div> : ""
           }
           <h1 className="text-white">{props.cityname}</h1>
         </div>
