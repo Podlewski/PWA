@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { auth, signInWithGoogle } from './firebase.utils';
+import firebase, { auth, signInWithGoogle } from './firebase';
 import Navbar from "./app_component/navbar.component";
 import Form from "./app_component/form.component";
 import Weather from "./app_component/weather.component";
@@ -48,7 +48,17 @@ class App extends React.Component {
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
       this.setState({ currentUser: user });
-    });
+
+      if (user) {
+        firebase.firestore().collection('favourites').doc(user.uid).get()
+          .then( (item) => {
+            this.setState({
+              favouriteCity: item.get("city"),
+              favouriteCountry: item.get("country")
+            })
+          })
+      }
+    })
   }
 
   componentWillUnmount() {
@@ -137,6 +147,12 @@ class App extends React.Component {
       favouriteCity: this.state.city,
       favouriteCountry: this.state.country,
     })
+
+    firebase.firestore().collection('favourites').doc(this.state.currentUser.uid)
+      .set({
+        city: this.state.city,
+        country: this.state.country
+      })
   }
 
   render() {
@@ -153,6 +169,7 @@ class App extends React.Component {
         <Form loadweather={this.getWeather} error={this.state.error} />
         <Weather
           cityname={this.state.city}
+          currentUser={this.state.currentUser}
           onFavouriteClick={this.addCityToFavourite}
           favouriteCity={this.state.favouriteCity}
           weatherIcon={this.state.icon}

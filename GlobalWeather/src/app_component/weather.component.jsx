@@ -11,7 +11,7 @@ const Weather = props => {
       <div className="Card">
         <div className="row justify-content-center py-3">
           {
-            props.cityname ? 
+            props.cityname !== undefined && props.currentUser !== null ? 
               <div className="pr-3">
               <button className="city-button p-1" onClick={props.onFavouriteClick}><h2 className="m-0">
               {
