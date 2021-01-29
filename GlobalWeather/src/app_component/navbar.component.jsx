@@ -9,8 +9,8 @@ import GoogleButton from 'react-google-button'
 const Navbar = props => { 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="./index.html">
+      <div className="container-fluid pl-2">
+        <a className="navbar-brand mb-auto" href="./index.html">
           <img
             src="global-weather.png"
             height="60"
@@ -30,7 +30,7 @@ const Navbar = props => {
         </button>
         <div className="justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item my-auto pr-4">
+            <li className="nav-item my-auto ml-auto px-2">
               {
                 props.currentUser ?
                   <div>
@@ -50,7 +50,7 @@ const Navbar = props => {
                   </div> : ""
               }
             </li>
-            <li className="nav-item my-auto pr-4">
+            <li className="nav-item my-auto ml-auto px-2">
               {
                 props.currentUser ?
                 <div>
@@ -64,13 +64,13 @@ const Navbar = props => {
                 </div> : ""
               }
             </li>
-            <li className="nav-item my-auto pr-4">
+            <li className="nav-item my-auto ml-auto px-2">
               {
                 props.currentUser ?
                 <div className="navbar-text font-weight-bold"> Hello {props.currentUser.displayName} </div> : <div/>
               }
             </li>
-            <li className="nav-item pr-2">
+            <li className="nav-item ml-auto pl-4">
               {
                 props.currentUser ?
                   <button className='btn btn-outline-white waves-effect waves-light'
