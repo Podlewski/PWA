@@ -113,6 +113,9 @@ class App extends React.Component {
 
   loadWeather = async (city, country) => {
     if (country && city) {
+      if (city.trim().toLowerCase() === 'łódź') {
+        city = 'Lodz'
+      }
       const api_call = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`
       );
@@ -120,7 +123,7 @@ class App extends React.Component {
       const response = await api_call.json();
 
       this.setState({
-        city: `${response.name}, ${response.sys.country}`,
+        city: response.name,
         country: response.sys.country,
         main: response.weather[0].main,
         celsius: this.calCelsius(response.main.temp),
@@ -163,12 +166,14 @@ class App extends React.Component {
           signout={() => auth.signOut()}
           currentUser={this.state.currentUser}
           favouriteCity={this.state.favouriteCity}
+          favouriteCountry={this.state.favouriteCountry}
           onFavouriteClick={this.loadFavouriteWetaher}
         />
         <img src={cloudicon} className="backlogo" alt={cloudicon} />
         <Form loadweather={this.getWeather} error={this.state.error} />
         <Weather
           cityname={this.state.city}
+          countryName={this.state.country}
           currentUser={this.state.currentUser}
           onFavouriteClick={this.addCityToFavourite}
           favouriteCity={this.state.favouriteCity}

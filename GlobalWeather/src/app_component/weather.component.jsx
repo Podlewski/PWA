@@ -21,7 +21,9 @@ const Weather = props => {
               }
               </h2></button></div> : ""
           }
-          <h1 className="text-white">{props.cityname}</h1>
+          {
+            props.cityname ? <h1 className="text-white">{props.cityname}, {props.countryName}</h1> : ""
+          }
         </div>
         <h5 className="py-4">
           <i className={`wi ${props.weatherIcon} display-1`} />

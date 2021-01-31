@@ -39,7 +39,7 @@ const Navbar = props => {
                       <button className="city-button" onClick={props.onFavouriteClick}>
                         <div>
                           <FontAwesomeIcon className="fa-color pr-1" icon={solStar} />
-                          <div className="navbar-text">{props.favouriteCity}</div>
+                          <div className="navbar-text">{props.favouriteCity}, {props.favouriteCountry}</div>
                         </div>
                       </button> : 
                       <div className="my-auto">
