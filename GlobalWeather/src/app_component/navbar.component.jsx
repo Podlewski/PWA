@@ -14,6 +14,7 @@ const Navbar = props => {
           <img
             src="global-weather.png"
             height="60"
+            width="60"
             alt="glob"
             loading="lazy"
             />         
