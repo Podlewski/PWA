@@ -10,8 +10,17 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "weather-icons/css/weather-icons.css";
 import cloudicon from "./assets/cloudicon.png"
+import SplashScreen from "./SplashScreen"
 
 const Api_Key = "429736441cf3572838aa10530929f7cd";
+
+function wait(ms){
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
+}
 
 class App extends React.Component {
   constructor() {
@@ -29,6 +38,7 @@ class App extends React.Component {
       temp_max: null,
       temp_min: null,
       description: "",
+      renderSplashScreen: true,
       error: false
     };
 
@@ -59,10 +69,17 @@ class App extends React.Component {
           })
       }
     })
+    window.addEventListener('load', this.handleLoad.bind(this));
   }
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
+    this.handleLoad.bind(this)
+  }
+
+  handleLoad() {
+    wait(2000)
+    this.setState({ renderSplashScreen: false });
   }
 
   get_WeatherIcon(icons, rangeId) {
@@ -159,6 +176,10 @@ class App extends React.Component {
   }
 
   render() {
+    if(this.state.renderSplashScreen){
+      return (<SplashScreen/>)
+    }
+
     return (
       <div className="App">
         <Navbar 
